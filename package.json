@@ -1,0 +1,16 @@
+{
+  "name": "terminal-trivia",
+  "version": "1.0.0",
+  "description": "a basic terminal based trivia game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajesh Mainali",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "keypress": "^0.2.1",
+    "terminal-kit": "^1.26.10"
+  }
+}
