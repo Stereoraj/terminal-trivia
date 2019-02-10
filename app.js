@@ -20,13 +20,19 @@ const questions = trivia.getTrivia()
 
 
 const displayMenu = (questionObj) => {
-    console.log(`asking question number ${counter + 1}`);
-        counter = counter + 1;
+    term.clear();
 
-        term.cyan(questionObj.question);
-        const options = questionObj.answers;
+    counter = counter + 1;
+    console.log(`Question No : ${counter + 1} / 10`);
 
-        term.singleColumnMenu( options , function( error , response ) {
+    term.moveTo(term.width - 12, 1);
+    console.log("Score : ", score);
+
+    term.cyan(questionObj.question);
+    const options = questionObj.answers;
+
+    term.singleColumnMenu( options , function( error , response ) {
+        if(questionObj.correct_answer === response.selectedText){
             term( '\n' ).eraseLineAfter.green(
                 "#%s selected: %s (%s,%s)\n" ,
                 response.selectedIndex ,
@@ -34,12 +40,20 @@ const displayMenu = (questionObj) => {
                 response.x ,
                 response.y
             );
-            if(counter < 10){
-                displayMenu(questionCollection[counter]);
-            }else{
-                process.exit() ;
-            }
-            
-        } ) ;
+            score  = score + 10;
+        }else{
+            term( '\n' ).eraseLineAfter.red("Your total score is ", score);
+
+            process.exit();
+        }
+
+        
+        if(counter < 10){
+            displayMenu(questionCollection[counter]);
+        }else{
+            process.exit() ;
+        }
+        
+    } ) ;
 }
     
