@@ -1,4 +1,5 @@
 const term = require("terminal-kit").terminal;
+const ora = require("ora");
 
 const trivia = require("./trivia/trivia.js");
 
@@ -7,13 +8,17 @@ let counter = 0;
 let score = 0;
 let questionCollection = [];
 
+const spinner = ora("loading the data").start();
+
 // fetch questions and answers
 const questions = trivia.getTrivia()
 .then((res) => {
         questionCollection = res;
-        displayMenu(questionCollection[counter])
+        spinner.stop();
+        displayMenu(questionCollection[counter]);
 })
 .catch((err) => {
+    spinner.stop();
     console.log("Not able to fetch the data !!", err);
 });
 
@@ -51,12 +56,9 @@ const displayMenu = (questionObj) => {
             term( '\n' ).eraseLineAfter.green(
                 "CORRECT ANSWER !!\n" 
             );
-            score  = score + 10;
-
-            
-
+            score  = score + 10;         
         }else{
-            term('\n').eraseLineAfter.green("The correct answer is :: ", questionObj.correct_answer);
+            term('\n').eraseLineAfter.red("The correct answer is :: ", questionObj.correct_answer);
             term( '\n' ).eraseLineAfter.red("Your total score is ", score);
 
             process.exit();
@@ -73,6 +75,7 @@ const displayMenu = (questionObj) => {
             });
             
         }else{
+
             process.exit() ;
         }
         
