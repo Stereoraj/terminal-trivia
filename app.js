@@ -14,7 +14,7 @@ const questions = trivia.getTrivia()
         displayMenu(questionCollection[counter])
 })
 .catch((err) => {
-    console.log("Error occurred : ", err);
+    console.log("Not able to fetch the data !!", err);
 });
 
 
@@ -23,13 +23,17 @@ const displayMenu = (questionObj) => {
     term.clear();
 
     counter = counter + 1;
-    console.log(`Question No : ${counter + 1} / 10`);
+    console.log(`Question No : ${counter} / 10`);
 
     term.moveTo(term.width - 12, 1);
     console.log("Score : ", score);
 
+    term("\n");
+
     term.cyan(questionObj.question);
     const options = questionObj.answers;
+
+    term("\n");
 
     term.singleColumnMenu( options , function( error , response ) {
         if(questionObj.correct_answer === response.selectedText){
@@ -41,7 +45,10 @@ const displayMenu = (questionObj) => {
                 response.y
             );
             score  = score + 10;
+
+
         }else{
+            term('\n').eraseLineAfter.green("The correct answer is :: ", questionObj.correct_answer);
             term( '\n' ).eraseLineAfter.red("Your total score is ", score);
 
             process.exit();

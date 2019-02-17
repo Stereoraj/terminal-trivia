@@ -3,16 +3,18 @@ module.exports.filterJSON = (initialJSON) => {
     console.log("initial json");
 
     initialJSON.map((record) => {
-        
-        let answers = record.incorrect_answers;
-        answers.push(record.correct_answer);
+        let answers = [];
+        record.incorrect_answers.forEach((incorrectAnswer) => {
+            answers.push(UriToAscii(incorrectAnswer));
+        });
+        answers.push(UriToAscii(record.correct_answer));
         answers = randomizeAnswers(answers);
 
         finalJSON.push({
-            category: record.category,
-            question: record.question,
+            category: UriToAscii(record.category),
+            question: UriToAscii(record.question),
             answers: answers,
-            correct_answer: record.correct_answer,
+            correct_answer: UriToAscii(record.correct_answer),
         });
     });
 
@@ -21,4 +23,8 @@ module.exports.filterJSON = (initialJSON) => {
 
 const randomizeAnswers = (answers) => {
     return require("shuffle-array")(answers);
+}
+
+const UriToAscii = (encodedURI) => {
+    return decodeURIComponent(encodedURI);
 }
