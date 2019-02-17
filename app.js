@@ -23,29 +23,37 @@ const displayMenu = (questionObj) => {
     term.clear();
 
     counter = counter + 1;
-    console.log(`Question No : ${counter} / 10`);
+    term.bgColorRgbHex("#97C8EB");
+    term.colorRgbHex("#001011");
+    term(`Question No : ${counter} / 10`);
+    term.bgDefaultColor();
 
-    term.moveTo(term.width - 12, 1);
-    console.log("Score : ", score);
+    term.moveTo(term.width - 9, 1);
+    term.colorRgbHex("#001011");
+    term.bgColorRgbHex("#97C8EB");
+    term("Score : ", score);
+    term.bgDefaultColor();
 
-    term("\n");
+    term("\n\n");
 
-    term.cyan(questionObj.question);
+    term.colorRgbHex("#97C8EB")
+    term(questionObj.question);
     const options = questionObj.answers;
 
     term("\n");
 
-    term.singleColumnMenu( options , function( error , response ) {
+    term.singleColumnMenu( options , {
+        selectedStyle: term.bgBlue,
+        exitOnUnexpectedKey: true
+    },
+        function( error , response ) {
         if(questionObj.correct_answer === response.selectedText){
             term( '\n' ).eraseLineAfter.green(
-                "#%s selected: %s (%s,%s)\n" ,
-                response.selectedIndex ,
-                response.selectedText ,
-                response.x ,
-                response.y
+                "CORRECT ANSWER !!\n" 
             );
             score  = score + 10;
 
+            
 
         }else{
             term('\n').eraseLineAfter.green("The correct answer is :: ", questionObj.correct_answer);
@@ -56,7 +64,14 @@ const displayMenu = (questionObj) => {
 
         
         if(counter < 10){
-            displayMenu(questionCollection[counter]);
+            term("\n\n").white(">>> PRESS ENTER FOR NEXT QUESTION <<<");
+
+            term.on("key", (name, matches, data) => {
+                if(name === "ENTER"){
+                    displayMenu(questionCollection[counter]);
+                }
+            });
+            
         }else{
             process.exit() ;
         }
