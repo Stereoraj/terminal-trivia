@@ -15,16 +15,31 @@ const questions = trivia.getTrivia()
 .then((res) => {
         questionCollection = res;
         spinner.stop();
-        displayMenu(questionCollection[counter]);
+
+        // questionCollection.forEach(async (question) => {
+        //     await displayMenu(question);
+        // });
+        loadGameSession(questionCollection);
+        
+        //process.exit();
+        //displayMenu(questionCollection[counter]);
 })
 .catch((err) => {
     spinner.stop();
     console.log("Not able to fetch the data !!", err);
 });
 
+async function loadGameSession(questionCollection){
+    for(const question of questionCollection){
+        console.log(question)
+        await displayMenu(question);
+        console.log("End of question")
+    }
 
+    process.exit();
+}
 
-const displayMenu = (questionObj) => {
+async function displayMenu(questionObj){
     term.clear();
 
     counter = counter + 1;
@@ -44,41 +59,10 @@ const displayMenu = (questionObj) => {
     term.colorRgbHex("#97C8EB")
     term(questionObj.question);
     const options = questionObj.answers;
-
+    term(questionObj.correct_answer);
     term("\n");
 
-    term.singleColumnMenu( options , {
-        selectedStyle: term.bgBlue,
-        exitOnUnexpectedKey: true
-    },
-        function( error , response ) {
-        if(questionObj.correct_answer === response.selectedText){
-            term( '\n' ).eraseLineAfter.green(
-                "CORRECT ANSWER !!\n" 
-            );
-            score  = score + 10;         
-        }else{
-            term('\n').eraseLineAfter.red("The correct answer is :: ", questionObj.correct_answer);
-            term( '\n' ).eraseLineAfter.red("Your total score is ", score);
+    var res = await term.singleColumnMenu(options).promise;
 
-            process.exit();
-        }
-
-        
-        if(counter < 10){
-            term("\n\n").white(">>> PRESS ENTER FOR NEXT QUESTION <<<");
-
-            term.on("key", (name, matches, data) => {
-                if(name === "ENTER"){
-                    displayMenu(questionCollection[counter]);
-                }
-            });
-            
-        }else{
-
-            process.exit() ;
-        }
-        
-    } ) ;
+    console.log(res);
 }
-    
