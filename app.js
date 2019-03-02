@@ -1,5 +1,6 @@
 const term = require("terminal-kit").terminal;
 const ora = require("ora");
+const keypress = require("keypress");
 
 const trivia = require("./trivia/trivia.js");
 
@@ -65,4 +66,10 @@ async function displayMenu(questionObj){
     var res = await term.singleColumnMenu(options).promise;
 
     console.log(res);
+
+    console.log(">>>  PLEASE PRESS [ENTER] TO CONTINUE <<<");
+
+    await require("./utilities/keyHandler").keyPress();
+    
 }
+
