@@ -67,9 +67,20 @@ async function displayMenu(questionObj){
 
     var res = await term.singleColumnMenu(options).promise;
 
-    console.log(res);
+    //console.log(res);
+    //console.log(questionObj);
 
-    console.log(">>>  PLEASE PRESS [ENTER] TO CONTINUE <<<");
+    if(res.selectedText === questionObj.correct_answer){
+        term("Correct Answer");
+    }else{
+        term("Wrong Answer");
+        term("\n");
+        term("Correct Answer is : ", questionObj.correct_answer);
+        term("\n\n");
+        process.exit();
+    }
+    term("\n");
+    term(">>>  PLEASE ANY KEY TO CONTINUE <<<");
 
     await require("./utilities/keyHandler").keyPress();
     
