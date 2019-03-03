@@ -1,6 +1,5 @@
 const term = require("terminal-kit").terminal;
 const ora = require("ora");
-const keypress = require("keypress");
 
 const trivia = require("./trivia/trivia.js");
 
@@ -31,6 +30,9 @@ const questions = trivia.getTrivia()
 });
 
 async function loadGameSession(questionCollection){
+    welcomeInstruction();
+    await require("./utilities/keyHandler").keyPress(term);
+
     for(const question of questionCollection){
         console.log(question)
         await displayMenu(question);
@@ -71,5 +73,27 @@ async function displayMenu(questionObj){
 
     await require("./utilities/keyHandler").keyPress();
     
+}
+
+const welcomeInstruction = () => {
+    term.clear();
+
+    // get the cursor position of the terminal to display message
+    // the cursor position such that the message appears in the center
+
+    displayMsgFormatted("WELCOME TO TERMINAL TRIVIA");
+    displayMsgFormatted("<< BASIC INSTRUCTION >>");
+    displayMsgFormatted(" * YOU WILL BE ASKED 10 QUESTIONS ");
+    displayMsgFormatted(" * USE THE ARROW KEY TO NAVIGATE THE OPTIONS AND PRESS ENTER TO SELECT IT");
+    displayMsgFormatted(" * YOU CAN PLAY THE GAME WHILE YOU GIVE THE CORRECT ANSWER");
+    displayMsgFormatted(" [[ PRESS ANY KEY TO CONTINUE ]]");
+    
+}
+
+const displayMsgFormatted = (msg) => {
+    var cursorPos = require("./utilities/centerText").getCursorPosition(term, msg);
+    term.column(cursorPos);
+    term(msg);
+    term.nextLine(2);
 }
 

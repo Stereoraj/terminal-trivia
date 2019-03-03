@@ -1,4 +1,4 @@
-module.exports.keyPress = () => {
+module.exports.keyPress = (term) => {
     return new Promise(resolve => {
         const readline = require("readline");
         readline.emitKeypressEvents(process.stdin);
