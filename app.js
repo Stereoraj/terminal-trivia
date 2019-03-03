@@ -72,11 +72,13 @@ async function displayMenu(questionObj){
 
     if(res.selectedText === questionObj.correct_answer){
         term("Correct Answer");
+        score = score + 10;
     }else{
         term("Wrong Answer");
         term("\n");
         term("Correct Answer is : ", questionObj.correct_answer);
         term("\n\n");
+        term(`Your score : ${score}`);
         process.exit();
     }
     term("\n");
