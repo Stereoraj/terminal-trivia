@@ -59,7 +59,7 @@ async function displayMenu(questionObj){
 
     term("\n\n");
 
-    term.colorRgbHex("#97C8EB")
+    term.colorRgbHex("#97C8EB");
     term(questionObj.question);
     const options = questionObj.answers;
     term(questionObj.correct_answer);
