@@ -34,10 +34,16 @@ async function loadGameSession(questionCollection){
     await require("./utilities/keyHandler").keyPress(term);
 
     for(const question of questionCollection){
-        console.log(question)
+        //console.log(question)
         await displayMenu(question);
-        console.log("End of question")
+        //console.log("End of question")
     }
+
+    term.clear();
+    
+    displayMsgFormatted("<<TERMINAL TRIVIA>>");
+    displayMsgFormatted("-------------------------");
+    displayMsgFormatted(`10 on 10 !! Winner Winner Chicken Dinner ....`);
 
     process.exit();
 }
