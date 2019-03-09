@@ -14,6 +14,7 @@ module.exports.filterJSON = (initialJSON) => {
             category: UriToAscii(record.category),
             question: UriToAscii(record.question),
             answers: answers,
+            difficulty: record.difficulty,
             correct_answer: UriToAscii(record.correct_answer),
         });
     });

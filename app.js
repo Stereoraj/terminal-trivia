@@ -26,7 +26,7 @@ const questions = trivia.getTrivia()
 })
 .catch((err) => {
     spinner.stop();
-    console.log("Not able to fetch the data !!", err);
+    console.log("Not able to fetch the data !! ", err);
 });
 
 async function loadGameSession(questionCollection){
@@ -52,24 +52,32 @@ async function displayMenu(questionObj){
     term.clear();
 
     counter = counter + 1;
-    term.bgColorRgbHex("#97C8EB");
-    term.colorRgbHex("#001011");
-    term(`Question No : ${counter} / 10`);
+    term.bgColorRgbHex("#DBFF33");
+    term.colorRgbHex("#0B3C49");
+    term(`| Question No : ${counter} / 10 |`);
     term.bgDefaultColor();
 
-    term.moveTo(term.width - 9, 1);
-    term.colorRgbHex("#001011");
-    term.bgColorRgbHex("#97C8EB");
-    term("Score : ", score);
+    term.moveTo(term.width - 11, 1);
+    term.bgColorRgbHex("#DBFF33");
+    term.colorRgbHex("#0B3C49");
+    term(` Score : ${score} `);
     term.bgDefaultColor();
 
     term("\n\n");
 
-    term.colorRgbHex("#97C8EB");
-    term(questionObj.question);
+    // term.colorRgbHex("#FFFDFD");
+    term.colorRgbHex("#688E26");
+    term("* ",questionObj.question);
     const options = questionObj.answers;
-    term(questionObj.correct_answer);
+    // term(questionObj.correct_answer);
+    // term(questionObj.difficulty);
     term("\n");
+    
+    term.bgDefaultColor();
+    term.defaultColor();
+    term.colorRgbHex("#FFFDFD");
+    // term.bgColorRgbHex("#666B6A");
+    // term.colorRgbHex("#A0EEC0");
 
     var res = await term.singleColumnMenu(options).promise;
 
@@ -80,11 +88,14 @@ async function displayMenu(questionObj){
         term("Correct Answer");
         score = score + 10;
     }else{
-        term("Wrong Answer");
-        term("\n");
+        term("\n\n");
+        term.bgColorRgbHex("#ff0000");
+        term(" Wrong Answer !! ");
+        term.bgDefaultColor();
+        term("\n\n");
         term("Correct Answer is : ", questionObj.correct_answer);
         term("\n\n");
-        term(`Your score : ${score}`);
+        term(`Your score : ${score}\n`);
         process.exit();
     }
     term("\n");
