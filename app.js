@@ -49,7 +49,7 @@ async function loadGameSession(questionCollection){
     // term.bgColorRgbHex("#b9d870");
     displayMsgFormatted("  ------------------------------- ");
     term("\n");
-    displayMsgFormatted("  <<TERMINAL TRIVIA>>  ");
+    displayMsgFormatted("  << TERMINAL TRIVIA >>  ");
     term("\n");
     displayMsgFormatted("  ------------------------------- ");
     term.bgDefaultColor();
@@ -114,7 +114,7 @@ async function displayMenu(questionObj){
         term("\n");
         term.bgBrightBlue(" Correct Answer  -> ").bgBrightGreen(`  ${questionObj.correct_answer}  `);
         term("\n");
-        term.bgBrightBlue(` Your Score      -> `).bgBrightYellow(`   ${score}  \n\n`);
+        term.bgBrightBlue(` Your Score      -> `).colorRgbHex("#0B3C49").bgBrightYellow(`   ${score}  \n\n`);
         process.exit();
     }
     term("\n\n");
