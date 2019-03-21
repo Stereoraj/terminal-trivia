@@ -158,7 +158,7 @@ const welcomeInstruction = () => {
 }
 
 const displayMsgFormatted = (msg) => {
-    var cursorPos = require("./utilities/centerText").getCursorPosition(term, msg);
+    var cursorPos = require("./utilities/centerText").getCursorPosition(term.width, msg);
     term.column(cursorPos);
     term(msg);
     //term.nextLine(2);
