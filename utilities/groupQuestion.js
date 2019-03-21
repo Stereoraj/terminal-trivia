@@ -3,7 +3,7 @@ module.exports.groupQuestionByDif = (questionArr) => {
     var mediumQuestions = [];
     var hardQuestions = [];
 
-    questionArr.map((question) => {
+    questionArr.forEach((question) => {
         if(question.difficulty === "easy"){
             easyQuestions.push(question);
         } else if(question.difficulty === "medium"){
