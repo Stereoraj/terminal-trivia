@@ -137,7 +137,7 @@ const expectedResult = [
 
 describe("Utilities - groupQuestion", () => {
     testCases.forEach((test, index) => {
-        it("should arrange the questions in easy, medium and hard order", () => {
+        it(`should arrange the questions in easy, medium and hard order. Test-Case : ${index+1}`, () => {
             expect(groupQuestion.groupQuestionByDif(test.questionArr)).toEqual(expectedResult[index].questionArr);
         });
     });

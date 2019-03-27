@@ -1,6 +1,5 @@
 module.exports.filterJSON = (initialJSON) => {
     let finalJSON = [];
-    console.log("initial json");
 
     initialJSON.map((record) => {
         let answers = [];
