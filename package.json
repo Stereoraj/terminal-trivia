@@ -4,7 +4,8 @@
   "description": "a basic terminal based trivia game",
   "main": "app.js",
   "scripts": {
-    "test": "mocha ./**/*.test.js"
+    "test": "mocha ./**/*.test.js",
+    "start": "node app.js"
   },
   "author": "Rajesh Mainali",
   "license": "ISC",
