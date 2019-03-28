@@ -12,9 +12,17 @@ Follow the instructions below to get a copy of the project up and running on you
 
 ## Installation and run
  
- ``` git clone https://github.com/Stereoraj/terminal-trivia.git ```
- ``` cd terminal-trivia```
- ``` npm start ```
+ ``` 
+ git clone https://github.com/Stereoraj/terminal-trivia.git 
+ ```
+
+ ``` 
+ cd terminal-trivia
+ ```
+
+ ``` 
+ npm start 
+ ```
 
 ## Running the tests
 
