@@ -20,6 +20,10 @@ Follow the instructions below to get a copy of the project up and running on you
  cd terminal-trivia
  ```
 
+ ```
+ npm install
+ ```
+
  ``` 
  npm start 
  ```
